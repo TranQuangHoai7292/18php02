@@ -42,7 +42,7 @@ section div {
 	border: 2px solid black;
 	border-top: none;
 	float: left;
-	clear: both;
+	clear: both;	
 }
 div {
 	width: 45.1%;
