@@ -5,26 +5,28 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<fieldset>
+	<fieldset style="width: 300px;">
 		<legend>Thông tin cá nhân</legend>
 		<form action="" method="post">
-    <table>
-        <tr>
-            <th>Họ và Tên :</th>
-            <td><input type="text" name="name"></td>
-        </tr>
+	    	<table>
+	        	<tr>
+	            	<th>Họ và Tên :</th>
+	            	<td><input type="text" name="name"></td>
+	        	</tr>
 
-        <tr>
-            <th>Email:</th>
-            <td><input type="email" name="email"></td>
-        </tr>
+	        	<tr>
+	            	<th>Email:</th>
+	            	<td><input type="email" name="email"></td>
+	        	</tr>
 
-        <tr>
-            <th>Số Điện Thoại :</th>
-            <td><input type="number" name="phone"></td>
-        </tr>
-    </table>
-    <button type="submit">Gửi</button>
+	        	<tr>
+	            	<th>Số Điện Thoại :</th>
+	            	<td><input type="number" name="phone"></td>
+	        	</tr>
+	    	</table>
+	    	<button type="submit">Gửi</button>
+	    </form>
+    	
 	</fieldset>
 </body>
 </html>
@@ -43,15 +45,17 @@ $name = "";
 $email = "";
 $phone = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (isset($_POST["name"])) {
+	if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["phone"])) {
 		$name = $_POST["name"];
-	}
-	if (isset($_POST["email"])) {
 		$email = $_POST["email"];
-	}
-	if (isset($_POST["phone"])) {
 		$phone = $_POST["phone"];
 	}
+	if (!$name || !$email || !$phone) {
+		echo "Bạn chưa nhập đầy đủ thông tin";
+		exit();
+	} 
+	
+	
 	$sql = "INSERT INTO users (name, email, phone) VALUES ('$name', '$email', '$phone')";
 	if ($connect->query($sql) === TRUE) {
 		echo "Thêm thông tin thành công";
