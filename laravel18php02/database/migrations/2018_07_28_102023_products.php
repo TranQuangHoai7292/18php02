@@ -16,9 +16,12 @@ class Products extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description');
+            $table->integer('id_type')->unsigned();
+            $table->text('description');
+            $table->float('unit_price', 8, 2);
+            $table->float('promotion_price', 8, 2);
             $table->string('image');
-            $table->string('price');
+            $table->string('unit');
             $table->timestamps();
         });
     }
