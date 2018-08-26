@@ -1,0 +1,25 @@
+.header-top a {
+	color: red;
+}
+.top-menu a {
+	color: black;
+}
+.top-menu a:hover {
+	color: red;
+}
+.menu-beta li a i {
+    color: #000;
+}
+.menu-beta li a:hover i {
+    color: red;
+}
+.top-details li a i {
+	color:red;
+}
+.top-details li a:hover {
+	color: blue;
+}
+.top-details li a:hover i{
+	color: blue;
+}
+
