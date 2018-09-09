@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call('CategorySeeder');
     }
+}
+class CategorySeeder extends Seeder
+{
+	public function run(){
+		DB::table('Category')->insert([
+			['id' => '1','category']
+		]);
+	}
 }

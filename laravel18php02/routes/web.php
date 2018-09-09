@@ -48,44 +48,81 @@
 		});
 	});
 }); */
-Route::get('schema/create',function (){
-	Schema::create('ten-bang',function($table){
-		$table->string('ten-cot');
-		$table->timestamps();
-	});
-});
-
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('index','Pagecontroller@getIndex');
-
-Route::get('admin',[
+//Route Admin
+Route::group(['prefix' => 'admin'], function(){
+	Route::get('/',[
 	'as'   => 'signin',
 	'uses' => 'Pagecontroller@getAdmin'
-]);
-//Đăng Ký
-Route::post('admin',[
+	]);
+	Route::post('/',[
 	'as'   => 'signin',
 	'uses' => 'Pagecontroller@postRegisterAdmin'
-]);
-//Đăng Nhập
+	]);
+	Route::group(['prefix'=> 'manager-user'],function(){
+		Route::get('/',[
+			'as' => 'manager-user',
+			'uses' => 'Pagecontroller@getManagerUser'
+		]);
+		Route::get('/edit/id={id}',[
+			'as'	=>	'edit',
+			'uses'	=>	'Pagecontroller@getEdit'
+		]);
+		Route::post('/edit/{id}',[
+			'as'	=>	'edit',
+			'uses'	=>	'Pagecontroller@postEdit'
+		]);
+		Route::get('/delete/id={id}',[
+			'as'	=>	'delete',
+			'uses'	=>	'Pagecontroller@getDelete'
+		]);	
+	});
+	
+	Route::get('/signup-product',[
+		'as' 	=> 	'signup-product',
+		'uses'	=>	'Pagecontroller@getSignupProduct'
+	]);
+	Route::post('/signup-product',[
+		'as'	=>	'signup-product',
+		'uses'	=>	'Pagecontroller@postSignupProduct'
+	]);
+	Route::get('/manager-products',[
+		'as'	=>	'manager-products',
+		'uses'	=>	'Pagecontroller@getManagerProduct'
+	]);
+	Route::get('/signup-type-products',[
+		'as' => 'signup-type-products',
+		'uses' => 'Pagecontroller@getSignupTypeProducts'
+	]);
+	Route::post('/signup-type-products',[
+		'as'	=>	'signup-type-products',
+		'uses'	=>	'Pagecontroller@postSignupTypeProducts'
+	]);
+});
 Route::get('login',[
 	'as' => 'login',
 	'uses' => 'Pagecontroller@getLogin'
-]);
+	]);
 Route::post('login',[
-	'as'   => 'login',
-	'uses' => 'Pagecontroller@postLogin'
+	'as'	=>	'login',
+	'uses'	=>	'Pagecontroller@postLogin'
 ]);
-//Đăng ký
-Route::get('register',[
+//Route Index
+Route::group(['prefix' => 'index'],function (){
+	Route::get('/',[
+		'as' 	=> 	'index',
+		'uses' 	=>	'Pagecontroller@getIndex'
+	]);
+	//Route register
+	Route::get('/register',[
 	'as' => 'register',
 	'uses' => 'Pagecontroller@getRegister'
-]);
-Route::post('register',[
+	]);
+	Route::post('/register',[
 	'as' => 'register',
 	'uses' => 'Pagecontroller@postRegister'
-]);
-
-
+	]);		
+});
+Route::get('test',function(){
+	$data = App\Category::find(1)->Type_Products()->product()->get()->toArray();
+	print($data);
+});

@@ -9,15 +9,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="styleAdmin/images/favicon.ico">
+        <link rel="shortcut icon" href="{{url('styleAdmin/images/ao.png')}}">
 
         <!-- App css -->
-        <link href="styleAdmin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="styleAdmin/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="styleAdmin/css/metismenu.min.css" rel="stylesheet" type="text/css" />
-        <link href="styleAdmin/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="{{url('styleAdmin/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('styleAdmin/css/icons.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('styleAdmin/css/metismenu.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('styleAdmin/css/style.css')}}" rel="stylesheet" type="text/css" />
 
-        <script src="styleAdmin/js/modernizr.min.js"></script>
+        <script src="{{url('styleAdmin/js/modernizr.min.js')}}"></script>
 
     </head>
 
@@ -123,15 +123,15 @@
 
 
         <!-- jQuery  -->
-        <script src="styleAdmin/js/jquery.min.js"></script>
-        <script src="styleAdmin/js/popper.min.js"></script>
-        <script src="styleAdmin/js/bootstrap.min.js"></script>
-        <script src="styleAdmin/js/metisMenu.min.js"></script>
-        <script src="styleAdmin/js/waves.js"></script>
-        <script src="styleAdmin/js/jquery.slimscroll.js"></script>
+        <script src="{{url('styleAdmin/js/jquery.min.js')}}"></script>
+        <script src="{{url('styleAdmin/js/popper.min.js')}}"></script>
+        <script src="{{url('styleAdmin/js/bootstrap.min.js')}}"></script>
+        <script src="{{url('styleAdmin/js/metisMenu.min.js')}}"></script>
+        <script src="{{url('styleAdmin/js/waves.js')}}"></script>
+        <script src="{{url('styleAdmin/js/jquery.slimscroll.js')}}"></script>
         <!-- App js -->
-        <script src="styleAdmin/js/jquery.core.js"></script>
-        <script src="styleAdmin/js/jquery.app.js"></script>
+        <script src="{{url('styleAdmin/js/jquery.core.js')}}"></script>
+        <script src="{{url('styleAdmin/js/jquery.app.js')}}"></script>
 
     </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Laravel </title>
+	<title>@yield('title')</title>
+	<base href="{{asset('')}}">
 	<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -15,6 +16,7 @@
 	<link rel="stylesheet" href="source/style/styleIndex/css/animate.css">
 	<link rel="stylesheet" title="style" href="source/style/styleIndex/css/huong-style.css">
 	<link rel="stylesheet" type="text/css" href="source/style/styleIndex/css/mystyle.css">
+	<link rel="shortcut icon" href="{{url('styleAdmin/images/ao.png')}}">
 </head>
 <body>	
 	<div id="header">
@@ -28,8 +30,7 @@
 				</div>
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
-						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-						<li><a href="{{route('signin')}}">Đăng kí</a></li>
+						<li><a href="{{route('register')}}"><i class="fa fa-user"></i>Tài khoản</a></li>
 						<li><a href="{{route('login')}}">Đăng nhập</a></li>
 					</ul>
 				</div>
