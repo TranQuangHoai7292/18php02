@@ -58,44 +58,93 @@ Route::group(['prefix' => 'admin'], function(){
 	'as'   => 'signin',
 	'uses' => 'Pagecontroller@postRegisterAdmin'
 	]);
+	Route::group(['prefix'	=>	'manager-type-products'],function(){
+		Route::get('/',[
+		'as'	=>	'manager-type-products',
+		'uses'	=>	'ProductsController@getManagerTypeProducts'
+		]);
+		Route::get('/category/edit/id={id}',[
+			'as'	=>	'edit-category',
+			'uses'	=>	'ProductsController@getEditCategory'
+		]);
+		Route::post('/category/edit/id={id}',[
+			'as'	=>	'edit-category',
+			'uses'	=>	'ProductsController@postEditCategory'
+		]);
+		Route::get('/category/delete/id={id}',[
+			'as'	=>	'delete',
+			'uses'	=>	'ProductsController@getDelete'
+		]);
+		Route::get('/type/edit/id={id}',[
+			'as'	=> 'edit-type',
+			'uses'	=>	'ProductsController@getEditType'
+		]);
+		Route::post('/type/edit/id={id}',[
+			'as'	=> 'edit-type',
+			'uses'	=>	'ProductsController@postEditType'
+		]);
+		Route::get('/type/delete/id={id}',[
+			'as' => 'delete-type',
+			'uses' 	=>	'ProductsController@getDeleteType'
+		]);
+	});
 	Route::group(['prefix'=> 'manager-user'],function(){
 		Route::get('/',[
 			'as' => 'manager-user',
-			'uses' => 'Pagecontroller@getManagerUser'
+			'uses' => 'UserController@getManagerUser'
 		]);
 		Route::get('/edit/id={id}',[
 			'as'	=>	'edit',
-			'uses'	=>	'Pagecontroller@getEdit'
+			'uses'	=>	'UserController@getEdit'
 		]);
 		Route::post('/edit/{id}',[
 			'as'	=>	'edit',
-			'uses'	=>	'Pagecontroller@postEdit'
+			'uses'	=>	'UserController@postEdit'
 		]);
 		Route::get('/delete/id={id}',[
 			'as'	=>	'delete',
-			'uses'	=>	'Pagecontroller@getDelete'
+			'uses'	=>	'UserController@getDelete'
 		]);	
-	});
-	
+	});	
 	Route::get('/signup-product',[
 		'as' 	=> 	'signup-product',
-		'uses'	=>	'Pagecontroller@getSignupProduct'
+		'uses'	=>	'ProductsController@getSignupProduct'
 	]);
 	Route::post('/signup-product',[
 		'as'	=>	'signup-product',
-		'uses'	=>	'Pagecontroller@postSignupProduct'
+		'uses'	=>	'ProductsController@postSignupProduct'
 	]);
-	Route::get('/manager-products',[
-		'as'	=>	'manager-products',
-		'uses'	=>	'Pagecontroller@getManagerProduct'
-	]);
+
+	//Quản Lý Sản Phẩm
+	Route::group(['prefix'	=>	'manager-product'],function(){
+		Route::get('/',[
+			'as'	=>	'manager-product',
+			'uses'	=>	'ProductsController@getManagerProduct'
+		]);
+		Route::get('/edit/id={id}',[
+			'as'	=>	'edit-product',
+			'uses'	=>	'ProductsController@getEditProduct'
+		]);
+		Route::post('/edit/id={id}',[
+			'as' 	=>	'edit-product',
+			'uses'	=>	'ProductsController@postEditProduct'
+		]);
+		Route::get('/delete/id={id}',[
+			'as'	=> 	'delete-product',
+			'uses'	=>	'ProductsController@getDeleteProduct'	
+		]);	
+	});
+
+	//Thêm Loại Sản Phẩm
 	Route::get('/signup-type-products',[
 		'as' => 'signup-type-products',
-		'uses' => 'Pagecontroller@getSignupTypeProducts'
+		'uses' => 'ProductsController@getSignupTypeProducts'
 	]);
+
+
 	Route::post('/signup-type-products',[
 		'as'	=>	'signup-type-products',
-		'uses'	=>	'Pagecontroller@postSignupTypeProducts'
+		'uses'	=>	'ProductsController@postSignupTypeProducts'
 	]);
 });
 Route::get('login',[
@@ -105,6 +154,10 @@ Route::get('login',[
 Route::post('login',[
 	'as'	=>	'login',
 	'uses'	=>	'Pagecontroller@postLogin'
+]);
+Route::get('logout',[
+	'as'	=>	'logout',
+	'uses'	=>	'Pagecontroller@getLogout'
 ]);
 //Route Index
 Route::group(['prefix' => 'index'],function (){
@@ -120,9 +173,9 @@ Route::group(['prefix' => 'index'],function (){
 	Route::post('/register',[
 	'as' => 'register',
 	'uses' => 'Pagecontroller@postRegister'
-	]);		
-});
-Route::get('test',function(){
-	$data = App\Category::find(1)->Type_Products()->product()->get()->toArray();
-	print($data);
+	]);
+	Route::get('/{category}',[
+		'as'	=>	'category',
+		'uses'	=>	'Pagecontroller@getCategory'
+	]);	
 });

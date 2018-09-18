@@ -18,46 +18,50 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
+                                    @if(Session::has('edit'))
+                                        <div class="alert alert-success">{{Session::get('edit')}}</div>
+                                    @endif
+                                    @if(Session::has('delete'))
+                                        <div class="alert alert-success">{{Session::get('delete')}}</div>
+                                    @endif
                                     <table id="datatable" class="table table-bordered">
                                         <thead>
                                         <tr> 
                                             <th>STT</th>
                                             <th>Hình Ảnh Sản Phẩm</th>
-                                            <th>ID</th>               
+                                            <th>Mục Sản Phẩm</th>               
                                             <th>Tên Sản Phẩm</th>
-                                            <th>Loại</th>
+                                            <th>Loại Sản Phẩm</th>
                                             <th>Màu Sắc</th>
                                             <th>Size</th>
                                             <th>Đơn Giá</th>
-                                            <th>Giá Khuyến Mãi</th>                                                                           
+                                            <th>Giá Khuyến Mãi</th>
+                                            <th>Trạng Thái</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>                                                                          
                                         </tr>
                                         </thead>
                                         @foreach($data as $dt)
+                                            @foreach ($dt->type_products as $type)
                                         <tbody>
                                         <tr>
                                             <td>{{$stt++}}</td>
                                             <td>
-                                                <img src='styleAdmin/images/{{$dt->image}}' style="width: 100px;height: 100px;">
+                                                <img src='styleAdmin/images/{{$type->pivot->image}}' style="width: 100px;height: 100px;">
                                             </td>                  
-                                            <td>{{$dt->id}}</td>
-                                            <td>{{$dt->name}}</td>
-                                            <td>
-                                                @if ($dt->id_type == 1)
-                                                    {{"Nu"}}
-                                                @elseif ($dt->id_type == 2)
-                                                    {{"Nam"}}
-                                                @elseif ($dt->id_type == 3)
-                                                    {{"Tre Em"}}
-                                                @else 
-                                                    {{"Big Size"}}
-                                                @endif
-                                            </td>
-                                            <td>{{$dt->color}}</td>
-                                            <td>{{$dt->size}}</td>
-                                            <td>{{$dt->unit_price}}</td>
-                                            <td>{{$dt->promotion_price}}</td>
+                                            <td>{{$dt->category}}</td>
+                                            <td>{{$type->pivot->name}}</td>
+                                            <td>{{$type->type_products}}</td>
+                                            <td>{{$type->pivot->color}}</td>
+                                            <td>{{$type->pivot->size}}</td>
+                                            <td>{{$type->pivot->unit_price}}</td>
+                                            <td>{{$type->pivot->promotion_price}}</td>
+                                            <td>{{$type->pivot->status}}</td>
+                                            <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="admin/manager-product/edit/id={{$type->pivot->id}}">Sửa</a></td>
+                                            <td class="center"><i class="fa fa-trash-o fa-fw"></i><a href="admin/manager-product/delete/id={{$type->pivot->id}}" onclick="if (!confirm('Bạn Có Chắc Chắn Muốn Xóa Sản Phẩm Này')) return false;">Xóa</a></td>
                                         </tr>                                      
                                         </tbody>
+                                            @endforeach
                                         @endforeach
                                     </table>
                                 </div>

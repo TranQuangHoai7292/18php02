@@ -57,7 +57,7 @@
                                             <td>{{$dt->name}}</td>
                                             <td>{{$dt->address}}</td>
                                             <td class="center"><i class="fa fa-pencil fa-fw"></i><a href="admin/manager-user/edit/id={{$dt->id}}">Sửa</a></td>
-                                            <td class="center"><i class="fa fa-trash-o fa-fw"></i><a href="admin/manager-user/delete/id={{$dt->id}}">Xóa</a></td>
+                                            <td class="center"><i class="fa fa-trash-o fa-fw"></i><a href="admin/manager-user/delete/id={{$dt->id}}" onclick="if (!confirm('Bạn Có Chắc Chắn Muốn Xóa Thành Viên Này')) return false;">Xóa</a></td>                                     
                                         </tr>                                      
                                         </tbody>
                                         @endforeach

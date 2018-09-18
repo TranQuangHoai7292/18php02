@@ -21,7 +21,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="p-20">
-                                                <form action="{{route('signup-product')}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+                                                <form action="admin/manager-product/edit/id={{$data->id}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
                                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                      @if(count($errors)>0)
                                                             <div class="alert alert-danger">
@@ -29,22 +29,20 @@
                                                                     {{$err}}
                                                                 @endforeach
                                                             </div>
-                                                        @endif
-                                                        @if(Session::has('success'))
-                                                            <div class="alert alert-success">{{Session::get('success')}}</div>
-                                                        @endif
+                                                        @endif                                                       
                                                     <div class="form-group row">            
-                                                        <label class="col-2 col-form-label">Tên Sản Phẩm *</label>
+                                                        <label class="col-2 col-form-label">Tên Sản Phẩm</label>
                                                         <div class="col-10">
-                                                            <input type="text" class="form-control" name="name">
+                                                            <input type="text" class="form-control" name="name" value="{{$data->name}}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-2 col-form-label">Danh Mục Sản Phẩm</label>
                                                         <div class="col-10">
                                                             <select class="selectpicker" data-style="btn-custom btn-block" name="id_category">
-                                                                @foreach ($data as $dt)
-                                                                <option value="{{$dt->id}}">{{$dt->category}}</option> @endforeach
+                                                                @foreach ($category as $cate)
+                                                                <option value="{{$cate->id}}">{{$cate->category}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
@@ -52,16 +50,16 @@
                                                         <label class="col-2 col-form-label">Loại Sản Phẩm</label>
                                                         <div class="col-10">
                                                             <select class="selectpicker" data-style="btn-custom btn-block" name="product_type">
-                                                                @foreach ($type as $dt)                              
-                                                                <option value="{{$dt->id}}">{{$dt->type_products}}</option>
-                                                                @endforeach                                                 
+                                                                @foreach ($type as $tp)
+                                                                <option value="{{$tp->id}}">{{$tp->type_products}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-2 col-form-label">Màu Sắc</label>
                                                         <div class="col-10">
-                                                            <input type="text" id="example-email" name="color" class="form-control">
+                                                            <input type="text" id="example-email" name="color" class="form-control" value="{{$data->color}}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -81,13 +79,13 @@
                                                     <div class="form-group row">
                                                         <label class="col-2 col-form-label">Đơn Giá</label>
                                                         <div class="col-10">
-                                                            <input type="text" class="form-control" name="unit_price">
+                                                            <input type="text" class="form-control" name="unit_price" value="{{$data->unit_price}}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label class="col-2 col-form-label">Giá Khuyến Mãi</label>
                                                         <div class="col-10">
-                                                            <input type="text" class="form-control" name="promotion_price" value="0">
+                                                            <input type="text" class="form-control" name="promotion_price" value="{{$data->promotion_price}}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -100,12 +98,18 @@
                                                         </div>
                                                     </div>                                
                                                     <div class="form-group row">
-                                                        <label class="col-2 col-form-label">Hình Ảnh</label>
+                                                        <label class="col-2 col-form-label">Hình Ảnh Sản Phẩm</label>
+                                                        <td>
+                                                		<img src='styleAdmin/images/{{$data->image}}' style="width: 100px;height: 100px;">
+                                            			</td>
+                                            		</div>
+                                            		<div class="form-group row">
+                                            			<label class="col-2 col-form-label">Hình Ảnh Thay Đổi</label>
                                                         <div class="col-10">
                                                             <input type="file" class="form-control" name="file">
-                                                        </div>
+                                                    	</div>
                                                     </div> 
-                                                    <button type="submit" class="btn btn-default" name="add_user">Thêm Sản Phẩm</button>
+                                                    <button type="submit" class="btn btn-default" name="add_user">Sửa Sản Phẩm</button>
                                                 </form>
                                             </div>
                                         </div>

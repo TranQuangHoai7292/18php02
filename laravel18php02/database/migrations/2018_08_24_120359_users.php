@@ -22,6 +22,7 @@ class Users extends Migration
             $table->string('name');
             $table->string('phone');
             $table->string('address');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

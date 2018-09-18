@@ -23,12 +23,16 @@
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="false" aria-expanded="false">
-                               <span class="ml-1">Nguyễn Minh Trang<i class="mdi mdi-chevron-down"></i> </span>
+                               <span class="ml-1">
+                                @if (Auth::check())
+                                {{Auth::user()->username}}
+                                @endif
+                                <i class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <!-- item-->
                                 <div class="dropdown-item noti-title">
-                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                    <h6 class="text-overflow m-0">Welcome Come</h6>
                                 </div>
 
                                 <!-- item-->
@@ -39,7 +43,7 @@
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fi-cog"></i> <span>Settings</span>
                                 </a>
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{route('logout')}}" class="dropdown-item notify-item">
                                     <i class="fi-power"></i> <span>Logout</span>
                                 </a>
 
@@ -68,12 +72,23 @@
                         <ul class="metismenu" id="side-menu">
                             <li class="menu-title">Navigation</li>
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Dữ Liệu Của Tôi</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Quản Lý Thành Viên</span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{route('signin')}}">Thêm Thành Viên</a></li>
                                     <li><a href="{{route('manager-user')}}">Thành Viên</a></li>
-                                    <li><a href="{{route('manager-products')}}">Sản Phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Quản Lý Sản Phẩm</span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{route('manager-product')}}">Sản Phẩm</a></li>
                                     <li><a href="{{route('signup-product')}}">Thêm Sản Phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i><span>Quản Lý Danh Mục Sản Phẩm</span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{route('manager-type-products')}}">Danh Mục Sản Phẩm</a></li>
                                     <li><a href="{{route('signup-type-products')}}">Thêm Mục Sản Phẩm</a></li>
                                 </ul>
                             </li>

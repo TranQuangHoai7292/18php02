@@ -30,8 +30,13 @@
 				</div>
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
+						@if (Auth::check())
+						<li><a href="#"><i class="fa fa-user"></i>{{Auth::user()->username}}</a></li>
+						<li><a href="{{route('logout')}}">Logout</a></li>
+						@else
 						<li><a href="{{route('register')}}"><i class="fa fa-user"></i>Tài khoản</a></li>
 						<li><a href="{{route('login')}}">Đăng nhập</a></li>
+						@endif
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -110,16 +115,16 @@
 				<div class="visible-xs clearfix"></div>
 				<nav class="main-menu">
 					<ul class="l-inline ov">
-						<li><a href="localhost:8000/index">Trang chủ</a></li>
-						<li><a href="#">Sản phẩm</a>
+						<li><a href="{{route('index')}}">Trang chủ</a></li>
+						<li><a href="#">Sản phẩm</a>							
 							<ul class="sub-menu">
-								<li><a href="product_type.html">Sản phẩm 1</a></li>
-								<li><a href="product_type.html">Sản phẩm 2</a></li>
-								<li><a href="product_type.html">Sản phẩm 4</a></li>
-							</ul>
+								@foreach ($cate as $ct)
+								<li><a href="#">{{$ct->category}}</a></li>
+								@endforeach
+							</ul>							
 						</li>
-						<li><a href="about.html">Giới thiệu</a></li>
-						<li><a href="contacts.html">Liên hệ</a></li>
+						<li><a href="#">Giới thiệu</a></li>
+						<li><a href="#">Liên hệ</a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</nav>

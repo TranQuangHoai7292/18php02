@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class type_products extends Model
 {
     protected $table = 'type_products';
-    public function products() {
-     	return $this->hasMany('App\products','id_typeproducts', 'id');
-    }
+
+    protected $fillable = ['type_products'];
+
     public function Category(){
-    	return $this->belongsTo('App\Category','category_id','id');
+    	return $this->belongsToMany('App\Category','products','id_typeproducts','id_category')->withPivot('id','name','color','size','unit_price','promotion_price','image','status');
     }
 }

@@ -15,8 +15,8 @@ class TypeProducts extends Migration
     {
         Schema::create('Type_Products', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('category_id');
             $table->string('type_products')->unique();
+            $table->string('alias');
             $table->timestamps();
         });
     }

@@ -12,111 +12,23 @@ use DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Category;
+
 
 class Pagecontroller extends Controller
 {
     public function getIndex(){
     	$datanew = DB::table('products')->orderBy('id','DESC')->skip(0)->take(4)->get();
         $data    = DB::table('products')->orderBy('id','DESC')->get();
-    	return view('page.trangchu',compact('data','datanew'));
-    }    
-    public function getProductType(){
-    	return view('page.products_type');
+        $cate    =  Category::all();
+    	return view('page.trangchu',compact('data','datanew','cate'));
     }
+    public function getCategory($category){
+        return view('page.category');
+    }    
     public function getAdmin(){        
         return view('admin.singup-user');
     }
-    public function getManagerUser(){
-        $data   =   User::all();
-        $stt    =   1;
-        $count  =   DB::table('users')->count();
-    	return view('admin.manager-user',compact('data','stt','count'));
-    }
-    public function getEdit($id){
-        $user = User::find($id);
-        return view('admin.edit-user',compact('user'));
-    }
-    public function postEdit(Request $req,$id){
-        $users = User::find($id);
-        $this->validate($req,[
-            'email' =>  'required|email|'.Rule::unique('users')->ignore($users->id),
-            'name'  =>  'required',
-            'phone' =>  'required',
-            'address'   =>  'required'
-        ],
-        [
-            'email.required'    =>  'Bạn Chưa Nhập Mật Khẩu Cần Thay Đổi',
-            'email.unique'      =>  'Email đã có người sử dụng',
-            'name.required'     =>  'Bạn Chưa Nhập Tên Cần Thay Đổi',
-            'phone.required'    =>  'Bạn Chưa Nhập Số Điện Thoại Cần Thay Đổi',
-            'address.required'  =>  'Bạn Chưa Nhập Địa Chỉ Cần Chỉnh Sửa'
-        ]);
-        $users->name     = $req->name;
-        $users->phone    = $req->phone;
-        $users->address  = $req->address;
-        $users->role     = $req->role;
-        if(isset($req->password)){
-            $this->validate($req,[
-                'password'      =>  'min:6|max:20',
-                're_password'   =>  'same:password'
-            ],
-            [
-                'password.min'  =>  'Mật Khẩu Bạn Nhập Quá Ngắn',
-                'password.max'  =>  'Mật Khẩu Bạn Nhập Quá Dài',
-                're_password.same'  =>  'Mật Khẩu Nhập Lại Không Đúng'
-            ]);
-            $users->password    =   Hash::make($req->password);
-        }
-        $users->save();
-        return redirect('admin/manager-user')->with('success','Thay Đổi Thông Tin Thành Công');
-    }
-    public function getDelete($id){
-        $users  =   User::find($id);
-        $users->delete();
-        return redirect('admin/manager-user')->with('delete','Xóa Thành Viên Thành Công');
-    }
-    public function getSignupProduct(){
-        return view('admin.signup-product');
-    }
-    public function getManagerProduct(){
-        $data = Products::all();
-        $stt=1;
-        return view('admin.manager-product',compact('data','stt'));
-    }
-    public function postSignupProduct(Request $req){
-        $this->validate($req, [
-            'name'              =>  'required',
-            'color'             =>  'required',
-            'size'              =>  'required',
-            'unit_price'        =>  'required|max:8',
-            'promotion_price'   =>  'required|max:8',
-            'file'              =>  'required|mimes:jpeg,jpg,png,gif|max:10240'
-        ],
-        [
-            'name.required'             =>  'Bạn Chưa Nhập Tên Sản Phẩm',
-            'color.required'            =>  'Bạn Chưa Nhập Màu Sắc',
-            'size.required'             =>  'Bạn Chưa Nhập Size',
-            'unit_price.required'       =>  'Bạn Chưa Nhập Đơn Giá',
-            'promotion_price.required'  =>  'Bạn Chưa Nhập Giá Khuyến Mãi',
-            'file.required'             =>  'Bạn Chưa Chọn Hình Ảnh Cho Sản Phẩm',
-            'file.mimes'                =>  'Bạn Chọn File Không Đúng Định Dạng',
-            'file.max'                  =>  'Dung Lượng Hình Ảnh Quá Lớn'
-        ]);
-        $product = new Products();
-        $product->name              =   $req->name;
-        $product->color             =   $req->color;
-        $product->size              =   $req->size;
-        $product->unit_price        =   $req->unit_price;
-        $product->promotion_price   =   $req->promotion_price;
-        $product->id_type           =   $req->product_type;
-        $file = $req->file('file');
-        $filename = time().'.'.$file->getClientOriginalExtension('file');
-        $product->image             =   $filename;
-        $file->move('styleAdmin/images',$filename);
-        $product->save();
-        return redirect()->back()->with('success','Dang Thong Tin San Pham Thanh Cong');
-    }
-
     public function postRegisterAdmin(Request $req){
         //Kiểm Tra dữ liệu nhập vào
         $this->validate($req,[
@@ -174,7 +86,10 @@ class Pagecontroller extends Controller
         }else{
             return redirect()->back()->with('fail','Tên Đăng Nhập Hoặc Mật Khẩu Bạn Nhập Không Đúng');
         }
-
+    }
+    public function getLogout(){
+        Auth::logout();
+        return redirect('login');
     }
     public function getRegister(){
         return view('register');
@@ -207,28 +122,14 @@ class Pagecontroller extends Controller
         $users->save();
         return redirect()->back()->with('success','Bạn Đã Đăng Ký Thành Công');  
     }
-    public function getSignupTypeProducts(){
-        return view('admin.signup-type-products');
-    }
-    public function postSignupTypeProducts(Request $req){
-        $this->validate($req, [
-            'items' =>  'required|unique:type_products,items|max:20',
-            'typeproducts' =>  'required|unique:type_products,type_products|max:20'
-        ],
-        [
-            'items.required'    =>  'Bạn Chưa Nhập Mục Sản Phẩm Mới',
-            'items.unique'      =>  'Mục Sản Phẩm Đã Có Xin Hãy Kiểm Tra Lại',
-            'items.max'         =>  'Mục Sản Phẩm Bạn Nhập Quá Dài',
-            'typeproducts.required'    =>  'Bạn Chưa Nhập Loại Sản Phẩm',
-            'typeproducts.unique'      =>  'Loại Sản Phẩm Này Đã Có Xin Hãy Kiểm Tra Lại',
-            'typeproducts.max'         =>  'Loại Sản Phẩm Bạn Nhập Quá Dài'
-        ]);
-        $typeproducts = new type_products();
-        $typeproducts->items   =   $req->items;
-        $typeproducts->type_products   =   $req->typeproducts;
-        $typeproducts->save();
-        return redirect()->back()->with('success','Bạn Đã Thêm Mục Sản Phẩm Mới Thành Công');
-    }
+    public function test(){
+        $data = Category::with('type_products')->get();
+        foreach ($data as $dt){
+            foreach ($dt->type_products as $type){
+                dd($type);
+            }
+        }
 
+    }
 }
 
