@@ -51,14 +51,14 @@
                                             <div class="form-group row m-b-20">
                                                 <div class="col-12">
                                                     <label for="username">Tên Đăng Nhập*</label>
-                                                    <input class="form-control" type="text" id="username" name="username" placeholder="Nhập Tên Đăng Nhập">
+                                                    <input class="form-control" type="text" id="username" name="username" placeholder="Nhập Tên Đăng Nhập" value="{{old('username')}}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row m-b-20">
                                                 <div class="col-12">
                                                     <label for="emailaddress">Email*</label>
-                                                    <input class="form-control" type="email" id="emailaddress" name="email" placeholder="john@gmail.com">
+                                                    <input class="form-control" type="email" id="emailaddress" name="email" placeholder="john@gmail.com" value="{{old('email')}}">
                                                 </div>
                                             </div>
 
@@ -77,19 +77,19 @@
                                             <div class="form-group row m-b-20">
                                                 <div class="col-12">
                                                     <label for="username">Họ Và Tên</label>
-                                                    <input class="form-control" type="text" name="name" placeholder="Nhập Tên Đầy Đủ">
+                                                    <input class="form-control" type="text" name="name" placeholder="Nhập Tên Đầy Đủ" value="{{old('name')}}">
                                                 </div>
                                             </div> 
                                             <div class="form-group row m-b-20">
                                                 <div class="col-12">
                                                     <label for="username">Số Điện Thoại</label>
-                                                    <input class="form-control" type="number" name="phone" placeholder="Nhập Số Điện Thoại Của Bạn">
+                                                    <input class="form-control" type="number" name="phone" placeholder="Nhập Số Điện Thoại Của Bạn" value="{{old('phone')}}">
                                                 </div>
                                             </div> 
                                             <div class="form-group row m-b-20">
                                                 <div class="col-12">
                                                     <label for="username">Địa Chỉ</label>
-                                                    <input class="form-control" type="text" name="address" placeholder="Địa Chỉ Thường Trú">
+                                                    <input class="form-control" type="text" name="address" placeholder="Địa Chỉ Thường Trú" value="{{old('address')}}">
                                                 </div>
                                             </div>                                         
                                             <div class="form-group row text-center m-t-10">

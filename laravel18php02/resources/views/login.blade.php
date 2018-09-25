@@ -46,7 +46,7 @@
                                             <div class="form-group m-b-20 row">
                                                 <div class="col-12">
                                                     <label for="login">Tên Đăng Nhập</label>
-                                                    <input class="form-control" type="text" id="emailaddress" name="username" placeholder="Nhập Tên Đăng Nhập">
+                                                    <input class="form-control" type="text" id="emailaddress" name="username" placeholder="Nhập Tên Đăng Nhập" value="{{old('username')}}">
                                                 </div>
                                             </div>
 

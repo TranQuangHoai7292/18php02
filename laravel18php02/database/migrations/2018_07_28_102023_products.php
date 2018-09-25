@@ -24,6 +24,7 @@ class Products extends Migration
             $table->string('unit_price');
             $table->string('promotion_price');
             $table->string('image');
+            $table->text('area');
             $table->string('status');
             $table->timestamps();
         });

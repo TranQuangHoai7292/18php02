@@ -17,9 +17,7 @@ class Bills extends Migration
             $table->increments('id');
             $table->integer('id_customer');
             $table->date('date_order');
-            $table->double('total', 8, 2);
-            $table->string('payment');
-            $table->string('note');
+            $table->string('total');
             $table->timestamps();
         });
     }

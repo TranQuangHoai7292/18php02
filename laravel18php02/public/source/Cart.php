@@ -23,8 +23,8 @@ class Cart
 				$giohang = $this->items[$id];
 			}
 		}
-		$giohang['qty']++;
-		$giohang['price'] = $item->unit_price * $giohang['qty'];
+		$giohang['qty']++;		
+		$giohang['price'] = $item->unit_price * $giohang['qty'];		
 		$this->items[$id] = $giohang;
 		$this->totalQty++;
 		$this->totalPrice += $item->unit_price;

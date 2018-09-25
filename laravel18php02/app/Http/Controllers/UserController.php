@@ -18,19 +18,19 @@ class UserController extends Controller
     public function getManagerUser(){
         $data   =   User::all();
         $stt    =   1;
-        $count  =   DB::table('users')->count();
-    	return view('admin.manager-user',compact('data','stt','count'));
+        $count  =   User::all()->count();
+    	return view('admin.user.manager-user',compact('data','stt','count'));
     }
     public function getEdit($id){
         $user = User::find($id);
-        return view('admin.edit-user',compact('user'));
+        return view('admin.user.edit-user',compact('user'));
     }
     public function postEdit(Request $req,$id){
         $users = User::find($id);
         $this->validate($req,[
-            'email' =>  'required|email|'.Rule::unique('users')->ignore($users->id),
-            'name'  =>  'required',
-            'phone' =>  'required',
+            'email'     =>  'required|email|'.Rule::unique('users')->ignore($users->id),
+            'name'      =>  'required',
+            'phone'     =>  'required',
             'address'   =>  'required'
         ],
         [
@@ -46,22 +46,22 @@ class UserController extends Controller
         $users->role     = $req->role;
         if(isset($req->password)){
             $this->validate($req,[
-                'password'      =>  'min:6|max:20',
-                're_password'   =>  'same:password'
+                'password'          =>  'min:6|max:20',
+                're_password'       =>  'same:password'
             ],
             [
-                'password.min'  =>  'Mật Khẩu Bạn Nhập Quá Ngắn',
-                'password.max'  =>  'Mật Khẩu Bạn Nhập Quá Dài',
+                'password.min'      =>  'Mật Khẩu Bạn Nhập Quá Ngắn',
+                'password.max'      =>  'Mật Khẩu Bạn Nhập Quá Dài',
                 're_password.same'  =>  'Mật Khẩu Nhập Lại Không Đúng'
             ]);
-            $users->password    =   Hash::make($req->password);
+            $users->password  =  Hash::make($req->password);
         }
         $users->save();
-        return redirect('admin/manager-user')->with('success','Thay Đổi Thông Tin Thành Công');
+        return redirect('admin/user/manager-user')->with('success','Thay Đổi Thông Tin Thành Công');
     }
     public function getDelete($id){
         $users  =   User::find($id);
         $users->delete();
-        return redirect('admin/manager-user')->with('delete','Xóa Thành Viên Thành Công');
+        return redirect('admin/user/manager-user')->with('delete','Xóa Thành Viên Thành Công');
     }
 }

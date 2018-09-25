@@ -49,7 +49,7 @@
 	});
 }); */
 //Route Admin
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin','middleware'=>'adminLogin'], function(){
 	Route::get('/',[
 	'as'   => 'signin',
 	'uses' => 'Pagecontroller@getAdmin'
@@ -58,6 +58,38 @@ Route::group(['prefix' => 'admin'], function(){
 	'as'   => 'signin',
 	'uses' => 'Pagecontroller@postRegisterAdmin'
 	]);
+	Route::group(['prefix' => 'manager-category'],function (){
+		Route::get('/',[
+			'as'	=>	'manager-category',
+			'uses'	=>	'ProductsController@getManagerCategory'
+		]);
+	});
+	Route::group(['prefix'=>'banner'],function(){
+		Route::get('/signup-banner',[
+			'as'	=>	'signup-banner',
+			'uses'	=>	'Pagecontroller@getSignupbanner'
+		]);
+		Route::post('/signup-banner',[
+			'as'	=>	'signup-banner',
+			'uses'	=>	'Pagecontroller@postSignupBanner'
+		]);
+		Route::get('manager-banner',[
+			'as'	=>	'manager-banner',
+			'uses'	=>	'Pagecontroller@getManagerBanner'
+		]);
+		Route::get('/edit/id={id}',[
+			'as'	=>	'edit-banner',
+			'uses'	=>	'Pagecontroller@getEditBanner'
+		]);
+		Route::post('edit/id={id}',[
+			'as'	=>	'edit-banner',
+			'uses'	=>	'Pagecontroller@postEditBanner'
+		]);
+		Route::get('delete/id={id}',[
+			'as'	=>	'delete-banner',
+			'uses'	=>	'Pagecontroller@getDeleteBanner'
+		]);
+	});
 	Route::group(['prefix'	=>	'manager-type-products'],function(){
 		Route::get('/',[
 		'as'	=>	'manager-type-products',
@@ -97,7 +129,7 @@ Route::group(['prefix' => 'admin'], function(){
 			'as'	=>	'edit',
 			'uses'	=>	'UserController@getEdit'
 		]);
-		Route::post('/edit/{id}',[
+		Route::post('/edit/id={id}',[
 			'as'	=>	'edit',
 			'uses'	=>	'UserController@postEdit'
 		]);
@@ -147,6 +179,9 @@ Route::group(['prefix' => 'admin'], function(){
 		'uses'	=>	'ProductsController@postSignupTypeProducts'
 	]);
 });
+
+
+
 Route::get('login',[
 	'as' => 'login',
 	'uses' => 'Pagecontroller@getLogin'
@@ -159,23 +194,66 @@ Route::get('logout',[
 	'as'	=>	'logout',
 	'uses'	=>	'Pagecontroller@getLogout'
 ]);
+
+
+
 //Route Index
 Route::group(['prefix' => 'index'],function (){
 	Route::get('/',[
 		'as' 	=> 	'index',
-		'uses' 	=>	'Pagecontroller@getIndex'
+		'uses' 	=>	'IndexController@getIndex'
 	]);
 	//Route register
 	Route::get('/register',[
-	'as' => 'register',
-	'uses' => 'Pagecontroller@getRegister'
+		'as' => 'register',
+		'uses' => 'Pagecontroller@getRegister'
 	]);
 	Route::post('/register',[
-	'as' => 'register',
-	'uses' => 'Pagecontroller@postRegister'
+		'as' => 'register',
+		'uses' => 'Pagecontroller@postRegister'
 	]);
 	Route::get('/{category}',[
 		'as'	=>	'category',
-		'uses'	=>	'Pagecontroller@getCategory'
+		'uses'	=>	'IndexController@getCategory'
 	]);	
+	Route::get('/{category}/{type}',[
+		'as'	=>	'category_type',
+		'uses'	=>	'IndexController@getProductByType'
+	]);		
 });
+Route::get('chi-tiet-san-pham/id={id}',[
+		'as' => 'product',
+		'uses' =>	'IndexController@getProduct'
+]);
+Route::get('buy/{id}',[
+	'as'	=>	'buy-product',
+	'uses'	=>	'IndexController@getBuyProduct'
+]);
+Route::get('shopping-cart',[
+	'as'	=>	'shopping-cart',
+	'uses'	=>	'IndexController@getShopping'
+]);
+Route::get('delete-shopping/{id}',[
+	'as' 	=>	'delete-shopping',
+	'uses'	=>	'IndexController@getDeleteShopping'
+]);
+Route::get('edit-shopping/{id}',[
+	'as'	=>	'edit-shopping',
+	'uses'	=>	'IndexController@getEditShopping'
+]);
+Route::get('search',[
+	'as' => 'search',
+	'uses' => 'IndexController@getSearch'
+]);
+Route::get('checkout',[
+	'as'	=>	'checkout',
+	'uses'	=>	'IndexController@getCheckOut'
+]);
+Route::post('checkout',[
+	'as'	=>	'checkout',
+	'uses'	=>	'IndexController@postOrder'
+]);
+Route::get('product',[
+		'as'	=>	'product-index',
+		'uses'	=>	'IndexController@getProductIndex'
+]);

@@ -72,24 +72,32 @@
                         <ul class="metismenu" id="side-menu">
                             <li class="menu-title">Navigation</li>
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Quản Lý Thành Viên</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Thành Viên</span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{route('manager-user')}}">Quản Lý Thành Viên</a></li>
                                     <li><a href="{{route('signin')}}">Thêm Thành Viên</a></li>
-                                    <li><a href="{{route('manager-user')}}">Thành Viên</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Quản Lý Sản Phẩm</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Sản Phẩm</span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{route('manager-product')}}">Sản Phẩm</a></li>
+                                    <li><a href="{{route('manager-product')}}">Quản Lý Sản Phẩm</a></li>
                                     <li><a href="{{route('signup-product')}}">Thêm Sản Phẩm</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript: void(0);"><i class="fi-briefcase"></i><span>Quản Lý Danh Mục Sản Phẩm</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i><span>Danh Mục,Loại Sản Phẩm</span> <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">
-                                    <li><a href="{{route('manager-type-products')}}">Danh Mục Sản Phẩm</a></li>
+                                    <li><a href="{{route('manager-category')}}">Danh Mục Sản Phẩm</a></li>
+                                    <li><a href="{{route('manager-type-products')}}">Loại Sản Phẩm</a></li>
                                     <li><a href="{{route('signup-type-products')}}">Thêm Mục Sản Phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-briefcase"></i> <span>Banner Trang Chủ</span> <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{route('manager-banner')}}">Quản Lý Banner</a></li>
+                                    <li><a href="{{route('signup-banner')}}">Thêm Banner</a></li>
                                 </ul>
                             </li>
                         </ul>
